@@ -1,14 +1,19 @@
+import { useAuth } from "@/context/AuthContext";
 import { Redirect } from "expo-router";
-import { useState } from "react";
-import { Text, View } from "react-native";
+import React from "react";
+import { Text } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Index() {
-const [isLoggedIn, setIsLoggedIn] = useState(false);
+const { user } = useAuth();
   return (
-    isLoggedIn ? (  
-    <View>
+    user ? (
+      
+    <SafeAreaView>
       <Text>Index</Text>
-    </View>
+
+
+    </SafeAreaView>
   ) : (
     <Redirect href="/login" />
   ));
