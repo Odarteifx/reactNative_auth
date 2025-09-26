@@ -1,6 +1,19 @@
+import { useAuth } from "@/context/AuthContext";
+import { Redirect } from "expo-router";
 import { Icon, Label, NativeTabs } from "expo-router/unstable-native-tabs";
 import React from "react";
+
 export default function ProtectedLayout() {
+    const { user, loading } = useAuth();
+
+    if (loading) {
+        return null; // or a loading spinner
+    }
+
+    if (!user) {
+        return <Redirect href="/login" />;
+    }
+
     return (
         <NativeTabs>
       <NativeTabs.Trigger name="index">
